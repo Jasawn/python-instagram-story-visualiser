@@ -89,6 +89,7 @@ Cons:
 - Unable to scrape after loading previous version of JSON file
 
 Roadmap:
+- Figure out how to parse the content of the JSON file into the scraper so that it can continue to scrape while loading previous versions of JSON file
 - Figure out how to auto-refresh the map with updated data once scraping has completed.
 - Look for other methods to monitor Instagram profiles and download the Instagram Story data.
 - Allow monitoring of Tiktok stories, Snapchat, Facebook etc.
