@@ -35,23 +35,23 @@ Step 3: Click on 'Click here to start new search' to begin Instagram Story Scrap
 Step 4: After entering the required information, click on 'Start Scraping...' and let it load. Initially, another browser will open another tab to attempt to login in Instagram. Next, the output will be as shown in the screenshot below.
 ![image](https://user-images.githubusercontent.com/91773813/233845635-19aa6a4b-7c9a-4499-a668-6dfbfa6a9bf2.png)
 	
-**NOTE:**While there will be a browser popup, you can minimise the browser and continue with your daily tasks.
+**NOTE:** While there will be a browser popup, you can minimise the browser and continue with your daily tasks.
 	
 Step 5: After the scraping has been completed, a 'data.json' file will be created in the directory and the content downloaded will be saved in /static directory. The browser will automatically reload and show the data scraped from the defined list of user as shown in the image below.
 	
 ![image](https://user-images.githubusercontent.com/91773813/233845893-c1537fc4-14d5-4093-a090-8bb52b4df30b.png)
 	
-**NOTE:**Those stories that have a location tag will have a pin shown in the map. While those stories without location tag can be seen after clicking on the 'No Coordinates' button located near the timeline slider
+**NOTE:** Those stories that have a location tag will have a pin shown in the map. While those stories without location tag can be seen after clicking on the 'No Coordinates' button located near the timeline slider
 
 Step 6: Clicking on the pin will have the output as shown in the screenshot below.
 ![image](https://user-images.githubusercontent.com/91773813/233846204-f1d4555b-a333-4ac3-8147-4fa1a152b6ff.png)
 
-**NOTE:**The popup consists of the date that the story is being posted, the user that the story was scraped from, the location tag and the exact timing of the story that is posted.
+**NOTE:** The popup consists of the date that the story is being posted, the user that the story was scraped from, the location tag and the exact timing of the story that is posted.
 
 Step 7: Clicking on the 'No Coordinates' button will have the output as shown in the screenshot below.
 ![image](https://user-images.githubusercontent.com/91773813/233846172-fca9d2ac-1cb2-4d7c-915c-fefb06c3b699.png)
 
-**NOTE:**The video is playable
+**NOTE:** The video is playable
 
 (Load previous data)
 Step 1: Open CMD and change the directory to where the code was saved and run the following code
@@ -73,7 +73,7 @@ Step 5: The browser will be redirected to a map with a timeline slider
 ![image](https://user-images.githubusercontent.com/91773813/233846587-678b65a3-c033-41b0-b8de-dddf2a301d4f.png)
 ![image](https://user-images.githubusercontent.com/91773813/233846596-43f53956-3cc6-4598-868e-cec8154a449e.png)
 
-**NOTE:**Move the slider to view the contents for the day
+**NOTE:** Move the slider to view the contents for the day
 	
 ## Additional Information
 Pros:
