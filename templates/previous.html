@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Enter Previous JSON file</title>
+    </head>
+	<body>
+		<form action="{{url_for('loadSearch')}}" method="POST" enctype="multipart/form-data">
+			<div class='textCenter'>
+				<label for="userlst">Select JSON file: </label>&nbsp<input type="file" id="jsonFile" name="jsonFile" accept=".json" required><br>
+			</div>
+			<hr>
+			<div class='buttonCenter'>
+				<input type="submit" value="Load JSON File..." class="submitButton">
+				<input type="button" value="Back..." class="submitButton" onclick="history.back()">
+			</div>
+        </form>
+	</body>
+</html>

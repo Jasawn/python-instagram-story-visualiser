@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Map</title>
+
+
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+
+    <style>
+        .timeline_div {
+            position: fixed;
+            bottom: 0; 
+            height: 15%;
+            width: 100%;
+            background: white;
+            z-index: 9999; /* Layer on top of everything else */
+        }
+
+        .marker_visible_true { 
+            visibility: visible;
+        }
+
+        .marker_visible_false { 
+            visibility: hidden;
+        }
+
+        div.timelineSlider{
+            width:100%;
+        }
+
+        input.slider{
+            -webkit-appearance:none;
+            appearance:none;
+            width:100%;
+            height:15px;
+            border-radius:5px;
+            background: grey;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        input.slider:hover{
+            opacity:1;
+        }
+
+        input.slider::-webkit-slider-thumb{
+            -webkit-appearance:none;
+            appearance:none;
+            width:25px;
+            height:25px;
+            border-radius:50%;
+            background:red;
+            cursor:pointer;
+        }
+        input.slider::-moz-range-thumb{
+            width:25px;
+            height:25px;
+            border-radius:50%;
+            background:red;
+            cursor:pointer;
+        }
+        datalist{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            writing-mode: vertical-lr;
+            width:100px;
+        }
+		.no_coordinates_hide {
+            position: fixed;
+            z-index: 0;
+            visibility: hidden;
+        }
+
+        .no_coordinates_visible {
+            position: fixed;
+            z-index: 9999;
+            visibility: visible;
+            top: 0;
+            height: 85%;
+            width: 100%;
+            background: white;
+            overflow: auto;
+        }
+        
+        
+    </style>
+	<script>
+        function no_coordinates() {
+        var no_coordinates_div = document.getElementById("no_coordinates")
+        console.log("hello");
+        if (no_coordinates_div.className == "no_coordinates_hide") {
+            no_coordinates_div.className = "no_coordinates_visible";
+            // generate videos here
+
+            {% for date in data %}
+            console.log("{{ date }}");
+            {% for line in data[date] %}
+
+            {% if line.get('lat') is none or line.get('lon') is none %}
+
+                console.log("{{ line.get('lat') }}");
+                console.log("{{ line.get('lon') }}");
+
+                var date_ele = document.createElement('h3');
+                date_ele.textContent = "{{ date }}";
+                var username_ele = document.createElement('h3');
+                username_ele.textContent = "{{ line.get('username') }}";
+                var location_ele = document.createElement('h3');
+                location_ele.textContent = "{{ line.get('location_name') }}";
+
+                {% if line.get('type')  == "video" %}
+
+                var vid_ele = document.createElement("video");
+				vid_ele.setAttribute('width', '320');
+				vid_ele.setAttribute('height', '240');
+				vid_ele.setAttribute("controls", "");
+				vid_source_ele = document.createElement("source");
+				vid_source_ele.setAttribute('src', "{{ url_for('static', filename=line.get('filename')) }}");
+				vid_source_ele.setAttribute('type', 'video/mp4');
+				vid_source_ele.textContent = "Your browser does not support the video tag.";
+				
+				vid_ele.appendChild(vid_source_ele);
+               
+                {% elif line.get('type') == 'image' %}
+
+                var vid_ele = document.createElement("img");
+				vid_ele.setAttribute('src', "{{ url_for('static', filename=line.get('filename')) }}");
+
+                {% endif %}
+                
+
+                no_coordinates_div.appendChild(date_ele);
+                no_coordinates_div.appendChild(username_ele);
+                no_coordinates_div.appendChild(location_ele);
+                no_coordinates_div.appendChild(vid_ele);
+
+                
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+        } else {
+            no_coordinates_div.className = "no_coordinates_hide";
+            // remove child elements 
+            no_coordinates_div.innerHTML = '';
+        }
+    }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+
+    <!-- Bootstrap CSS/JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	
+</head>
+<body>
+    <div id="map"></div>
+    <div class="no_coordinates_hide" id="no_coordinates"></div>
+    <div class="timeline_div">
+        <div class="container">
+        <h2 class="date" id="currentTimelineDate"></h2>
+        <div class="timelineSlider" id="timelineSliderDiv"></div>
+        <button onclick="no_coordinates()">No Coordinates</button>
+    </div>
+    </div>
+</body>
+</html>
+
+<script>
+        var map = L.map(
+        "map",
+        {
+            center: [1.3440170025414784, 103.80849929084546],
+            crs: L.CRS.EPSG3857,
+            zoom: 10,
+            zoomControl: true,
+            preferCanvas: false,
+            minZoom: 3,
+        }
+    );
+	
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+	
+	
+	
+	try{
+		var freq = parseInt('{{ freq }}');
+		if (isNan(freq)){
+			throw new Error('Error');
+		}
+	}catch(error)
+	{
+		data = "";
+		console.log("No frequency");
+	}
+	try{
+		var data = '{{ data | tojson }}';
+	}catch (error)
+	{
+		console.log("No JSON");
+	}
+	
+	if (Number.isInteger(freq) && data.length === 2) {
+		console.log("INSIDE");
+		alert("Scraping is running in the background!");
+		$.ajax({
+			'url':'/startScraping',
+			'type':'POST',
+		});
+		var frequency = 1 * 60 * 1000;
+		console.log(frequency);
+	}
+	else{
+		console.log("OUTSIDE");
+		var frequency = 1 * 60 * 1000;
+		const data = {{ data | tojson }};
+		const dates = Object.keys(data);
+		var counter = dates.length - 1;
+
+		var marker_counter = 0;
+		var marker_list = [];
+		var marker_tracker = [];
+		var x_counter = 0;
+
+/* Generate Timeline -------------------------------------------------------- */
+
+		var timelineDiv = document.getElementById("timelineSliderDiv");
+		var addTimeline = document.createElement("input");
+		addTimeline.setAttribute("type","range");
+		addTimeline.setAttribute("class","slider");
+		addTimeline.setAttribute("min","0");
+		addTimeline.setAttribute("max",counter);
+		addTimeline.setAttribute("value","0");
+		addTimeline.setAttribute("step","1");
+		addTimeline.setAttribute("id","currentDate");
+		timelineDiv.appendChild(addTimeline);
+
+		var currentDate = document.getElementById("currentDate");
+		var displayDate = document.getElementById("currentTimelineDate");
+		
+		displayDate.innerHTML = "Date: " + dates[currentDate.value];
+
+		updateDate();
+
+
+		currentDate.oninput = function() {
+			updateDate();
+			console.log("das");
+		}
+
+		function updateDate() {
+			displayDate.innerHTML = "Date: " + dates[currentDate.value];
+
+			for(let i = 0; i < marker_list.length; i++) {
+				map.removeLayer(marker_list[i]);
+			}
+
+/* Markers -------------------------------------------------------- */
+
+			{% set marker_counter = 0 %}
+			{% for date in data %}
+			{% for line in data[date] %}
+			
+			marker_date = "{{ date }}";
+			console.log(marker_date);
+			console.log(dates[currentDate.value]);
+			
+			{% if line.get('lat') is not none and line.get('lon') is not none %}
+				console.log("{{ line.get('username') }}");
+				console.log("{{ line.get('lat') }}");
+
+			
+			if (dates[currentDate.value] == marker_date) {
+				
+				console.log(marker_date);
+				console.log("{{ line.get('lon') }}");
+				console.log("{{ line.get('type') }}");
+
+				{% if line.get('type') == "image" %}
+
+				var html_string =  `<h3>{{ date }}</h3>
+						<h3>{{ line.get('username') }}</h3>
+						<h3>{{ line.get('location_name') }}</h3>
+						<h3>{{ line.get('time') }}
+						<img src="{{ url_for('static', filename=line.get('filename')) }}"`;
+
+				{% elif line.get('type') == "video" %}      
+
+				var html_string =  `<h3>{{ date }}</h3>
+							<h3>{{ line.get('username') }}</h3>
+							<h3>{{ line.get('location_name') }}</h3>
+							<h3>{{ line.get('time') }}
+							<video width="320" height="240" controls>
+								<source src="{{ url_for('static', filename=line.get('filename')) }}" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>`;             
+
+				{% endif %}
+
+				var marker_{{ marker_counter }} = L.marker(
+					[{{ line.get('lat') }}, {{ line.get('lon') }}],
+					{}
+				).addTo(map);
+
+				marker_list.push(marker_{{ marker_counter }});
+
+
+				var icon_{{ marker_counter }}  = L.AwesomeMarkers.icon(
+					{"extraClasses": "fa-rotate-0", 
+					"icon": "cloud", 
+					"iconColor": "white", 
+					"markerColor": "blue", 
+					"prefix": "glyphicon"
+					}
+				);
+				marker_{{ marker_counter }}.setIcon(icon_{{ marker_counter }} );
+
+				var popup_{{ marker_counter }} = L.popup({"maxWidth": "100%"});
+
+				var html_{{ marker_counter }} = $('<div id="html_{{ counter }}" style="width: 100.0%; height: 100.0%;">' + html_string + '</div>')[0];
+				popup_{{ marker_counter }}.setContent(html_{{ marker_counter }});
+
+				marker_{{ marker_counter }}.bindPopup(popup_{{ marker_counter }})
+			
+			}
+
+			{% set marker_counter = marker_counter + 1 %}
+			{% endif %}
+			{% endfor %}
+			{% endfor %}
+
+		}
+
+/* -------------------------------------------------------- */
+
+		function check_co(xlat, xlong, ylat, ylong) {
+			var lat_diff = 0.2;
+			var long_diff = 0.2;
+			if (Math.abs(xlat - ylat) > lat_diff || Math.abs(xlong - ylong) > long_diff) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+		
+	}
+	
+	setInterval(function(){
+	window.location.href = "map";},frequency); 
+	
+</script>

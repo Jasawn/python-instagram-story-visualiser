@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Parameters for Instagram Scraping</title>
+    </head>
+	<body>
+		<h2 style="text-align:center">Parameters for Instagram Scraping</h2>
+		<hr>
+		<form action="{{url_for('searchParams')}}" method="POST" enctype="multipart/form-data">
+			<div class='textCenter'>
+				<label for="instaEmail">Instagram's Username</label>&nbsp<input type="text" id="username" name="username" required><br>
+			</div>
+			<div class='textCenter'>
+				<label for="instaPass">Instagram's Password</label>&nbsp<input type="password" id="pass" name="pass" required><br>
+			</div>
+			<div class='textCenter'>
+				<label for="frequency">Intervals between Instagram Scraping (In Minutes)(Note: Too frequent will result in softban)</label>&nbsp<input type="number" id="frequency" name="frequency" required><br>
+			</div>
+			<div class='textCenter'>
+				<label for="userlst">List of users to scrape (Text File Only!): </label>&nbsp<input type="file" id="userlst" name="userlst" accept=".txt" required><br>
+			</div>
+			<hr>
+			<div class='buttonCenter'>
+				<input type="submit" value="Start Scraping..." class="submitButton">
+				<input type="button" value="Back..." class="submitButton" onclick="history.back()">
+			</div>
+		</form>
+	</body>
+</html>
