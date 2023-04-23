@@ -12,10 +12,10 @@ This tool uses an Instagram account to monitor the Instagram Story of a user-def
 ## Installation Guide:
 1) Ensure that you minimally have Python version>=3.9.7
 
-	git clone https://github.com/Jasawn/python-instagram-story-visualiser.git
-	cd /Jasawn
-	pip install -r requirements.txt
-	python gui.py
+	1. git clone https://github.com/Jasawn/python-instagram-story-visualiser.git
+	2. cd /Jasawn
+	3. pip install -r requirements.txt
+	4. python gui.py
 
 ## Usage
 
