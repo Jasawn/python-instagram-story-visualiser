@@ -86,6 +86,7 @@ Cons:
 - Currently only supports scraping of Instagram Stories.
 - Instagram Stories must have a Location Tag, otherwise it will not be displayed on a map.
 - Map is unable to auto-refresh once a scrape has completed
+- Unable to scrape after loading previous version of JSON file
 
 Roadmap:
 - Figure out how to auto-refresh the map with updated data once scraping has completed.
