@@ -11,36 +11,35 @@ This tool uses an Instagram account to monitor the Instagram Story of a user-def
 
 ## Installation Guide:
 1) Ensure that you minimally have Python version>=3.9.7
-
 	1. git clone https://github.com/Jasawn/python-instagram-story-visualiser.git
 	2. cd python-instagram-story-visualiser
 	3. pip install -r requirements.txt
 
 ## Usage
-	Step 1: Run the following code
-	python gui.py
-	![image](https://user-images.githubusercontent.com/91773813/233845145-8b187318-78e3-4b72-9fd3-9ba922f7efa4.png)
+Step 1: Run the following code
+python gui.py
+![image](https://user-images.githubusercontent.com/91773813/233845145-8b187318-78e3-4b72-9fd3-9ba922f7efa4.png)
 
-	2. Copy the link as shown in the image above 'http://127.0.0.1:5000/ and paste into a browser (Preferably Chrome or Firefox) and the output will be as shown in the screenshot below
-	![image](https://user-images.githubusercontent.com/91773813/233845272-9b78d3c0-6705-4afb-9f2d-97c9a8a46393.png)
+2. Copy the link as shown in the image above 'http://127.0.0.1:5000/ and paste into a browser (Preferably Chrome or Firefox) and the output will be as shown in the screenshot below
+![image](https://user-images.githubusercontent.com/91773813/233845272-9b78d3c0-6705-4afb-9f2d-97c9a8a46393.png)
 	
-	3. Click on 'Click here to start new search' to begin Instagram Story Scraping with the defined list of users. After clicking on the 'Click here to start new search', the output will be as shown in the screenshot below.
-	![image](https://user-images.githubusercontent.com/91773813/233845422-c8522113-08ff-4451-9ba9-bb79c7eb70bd.png)
+3. Click on 'Click here to start new search' to begin Instagram Story Scraping with the defined list of users. After clicking on the 'Click here to start new search', the output will be as shown in the screenshot below.
+![image](https://user-images.githubusercontent.com/91773813/233845422-c8522113-08ff-4451-9ba9-bb79c7eb70bd.png)
 
-	NOTE: Do provide valid Instagram account. Create a text file with predefined list of users specified inside the text file and save the file in the same directory as the code.
+NOTE: Do provide valid Instagram account. Create a text file with predefined list of users specified inside the text file and save the file in the same directory as the code.
 	
-	![image](https://user-images.githubusercontent.com/91773813/233845535-72cce24b-acaa-4e18-9a4b-f866d4f83c44.png)
+![image](https://user-images.githubusercontent.com/91773813/233845535-72cce24b-acaa-4e18-9a4b-f866d4f83c44.png)
 
-	4. After entering the required information, click on 'Start Scraping...' and let it load. Initially, another browser will open another tab to attempt to login in Instagram. Next, the output will be as shown in the screenshot below.
-	![image](https://user-images.githubusercontent.com/91773813/233845635-19aa6a4b-7c9a-4499-a668-6dfbfa6a9bf2.png)
+4. After entering the required information, click on 'Start Scraping...' and let it load. Initially, another browser will open another tab to attempt to login in Instagram. Next, the output will be as shown in the screenshot below.
+![image](https://user-images.githubusercontent.com/91773813/233845635-19aa6a4b-7c9a-4499-a668-6dfbfa6a9bf2.png)
 	
-	NOTE: While there will be a browser popup, you can minimise the browser and continue with your daily tasks.
+NOTE: While there will be a browser popup, you can minimise the browser and continue with your daily tasks.
 	
-	5. After the scraping has been completed, a 'data.json' file will be created in the directory and the content downloaded will be saved in /static directory. The browser will automatically reload and show the data scraped from the defined list of user as shown in the image below.
+5. After the scraping has been completed, a 'data.json' file will be created in the directory and the content downloaded will be saved in /static directory. The browser will automatically reload and show the data scraped from the defined list of user as shown in the image below.
 	
-	![image](https://user-images.githubusercontent.com/91773813/233845893-c1537fc4-14d5-4093-a090-8bb52b4df30b.png)
+![image](https://user-images.githubusercontent.com/91773813/233845893-c1537fc4-14d5-4093-a090-8bb52b4df30b.png)
 	
-	NOTE: Those stories that have a location tag will have a pin shown in the map. While those stories without location tag can be seen after clicking on the 'No Coordinates' button located near the timeline slider
+NOTE: Those stories that have a location tag will have a pin shown in the map. While those stories without location tag can be seen after clicking on the 'No Coordinates' button located near the timeline slider
 	
 
 
