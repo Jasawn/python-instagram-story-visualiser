@@ -18,9 +18,10 @@ This tool uses an Instagram account to monitor the Instagram Story of a user-def
 ## Usage
 Step 1: Run the following code
 python gui.py
+
 ![image](https://user-images.githubusercontent.com/91773813/233845145-8b187318-78e3-4b72-9fd3-9ba922f7efa4.png)
 
-Step 2: Copy the link as shown in the image above 'http://127.0.0.1:5000/ and paste into a browser (Preferably Chrome or Firefox) and the output will be as shown in the screenshot below
+Step 2: Copy the link as shown in the image above 'http://127.0.0.1:5000/' and paste into a browser (Preferably Chrome or Firefox) and the output will be as shown in the screenshot below
 ![image](https://user-images.githubusercontent.com/91773813/233845272-9b78d3c0-6705-4afb-9f2d-97c9a8a46393.png)
 	
 Step 3: Click on 'Click here to start new search' to begin Instagram Story Scraping with the defined list of users. After clicking on the 'Click here to start new search', the output will be as shown in the screenshot below.
