@@ -11,7 +11,7 @@ This tool uses an Instagram account to monitor the Instagram Story of a user-def
 
 ## Installation Guide:
 1) Ensure that you minimally have Python version>=3.9.7
-	1. git clone https://github.com/Jasawn/python-instagram-story-visualiser.git
+	1. git clone https://github.com/Jasawn/python-instagram-story-visualiser
 	2. cd python-instagram-story-visualiser
 	3. pip install -r requirements.txt
 
